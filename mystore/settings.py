@@ -26,16 +26,23 @@ SECRET_KEY = 'x@fr$^$8(&rfgj)!4098#9ama)0_2ztiip7x2ac(r*!qa1nq2u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['localhost', 'lit-beach-81401.herokuapp.com']
 
+=======
+ALLOWED_HOSTS = ['localhost', 'warm-sierra-48751.herokuapp.com']
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 
 # Application definition
 
 INSTALLED_APPS = [
     'estore',
     'bootstrap3',
+<<<<<<< HEAD
     'fontawesome',
     'storages',
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,12 +126,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
+<<<<<<< HEAD
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
@@ -137,11 +144,17 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 MEDIA_URL = 'http://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+<<<<<<< HEAD
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+=======
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
@@ -151,4 +164,16 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+<<<<<<< HEAD
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+=======
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = '/login/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e

@@ -19,4 +19,8 @@ def user_logged_out(sender, request, user, signal, *args, **kwargs):
 
 @receiver(user_login_failed)
 def user_login_failed(sender, credentials, request, *args, **kwargs):
+<<<<<<< HEAD
     messages.error(request, '帳號密碼驗證失敗，請重試')
+=======
+    messages.error(request, '帳號密碼驗證失敗，請重試')
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e

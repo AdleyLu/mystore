@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import uuid
 
 from django.contrib import messages
@@ -10,11 +11,21 @@ from django.views import generic
 
 from .forms import OrderInfoForm
 from .models import Order, Product
+=======
+from django.contrib import messages
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.models import Group, User
+from django.urls import reverse
+from django.views import generic
+
+from .models import Product
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 
 
 # Create your views here.
 
 
+<<<<<<< HEAD
 class CartDetailFromRequest(generic.DetailView):
     def get_object(self):
         return self.request.cart
@@ -85,6 +96,8 @@ class OrderCreateCartCheckout(LoginRequiredMixin, generic.CreateView):
         return reverse('order_detail', kwargs={'token': self.object.token})
 
 
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 class ProductList(PermissionRequiredMixin, generic.ListView):
     model = Product
 
@@ -94,11 +107,17 @@ class ProductList(PermissionRequiredMixin, generic.ListView):
         else:
             return True
 
+<<<<<<< HEAD
 
 class ProductDetail(generic.DetailView):
     model = Product
 
 
+=======
+class ProductDetail(generic.DetailView):
+    model = Product
+
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 class ProductCreate(PermissionRequiredMixin, generic.CreateView):
     permission_required = 'estore.add_product'
     model = Product
@@ -108,7 +127,10 @@ class ProductCreate(PermissionRequiredMixin, generic.CreateView):
         messages.success(self.request, '產品已新增')
         return reverse('dashboard_product_list')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 class ProductUpdate(PermissionRequiredMixin, generic.UpdateView):
     permission_required = 'estore.change_product'
     model = Product
@@ -119,6 +141,7 @@ class ProductUpdate(PermissionRequiredMixin, generic.UpdateView):
         return reverse('dashboard_product_update', kwargs=self.kwargs)
 
 
+<<<<<<< HEAD
 class ProductAddToCart(generic.DetailView):
     model = Product
     http_method_names = ['post']
@@ -131,6 +154,8 @@ class ProductAddToCart(generic.DetailView):
         return redirect('product_detail', pk=self.object.id)
 
 
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 class UserList(PermissionRequiredMixin, generic.ListView):
     permission_required = 'auth.change_user'
     model = User
@@ -160,4 +185,8 @@ class UserRemoveFromStaff(PermissionRequiredMixin, generic.UpdateView):
             group = Group.objects.get(name='estore_staff')
             group.user_set.remove(self.object)
             messages.success(self.request, '已變更使用者身份為一般使用者')
+<<<<<<< HEAD
         return reverse('dashboard_user_list')
+=======
+        return reverse('dashboard_user_list')
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e

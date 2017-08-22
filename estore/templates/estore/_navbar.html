@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 {% load fontawesome %}
 
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -21,9 +24,12 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
                 <li>
                     <a href="{% url 'cart_detail' %}">購物車 {% fontawesome_icon 'shopping-cart' %} ({{ request.cart.items.count }})</a>
                 </li>
+=======
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
                 {% if not user.is_authenticated %}
                     <li><a href="{% url 'login' %}">登入</a></li>
                 {% else %}
@@ -41,4 +47,8 @@
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+<<<<<<< HEAD
 </nav>
+=======
+</nav>
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e

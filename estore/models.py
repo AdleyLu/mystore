@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import uuid
 
 from django.contrib.auth.models import User
@@ -8,6 +9,11 @@ from django_fsm import FSMField, transition
 # Create your models here.
 
 
+=======
+from django.db import models
+
+# Create your models here.
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='產品名稱')
     description = models.TextField(verbose_name='產品敘述')
@@ -16,6 +22,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_images/', verbose_name='商品圖片', blank=True, null=True)
 
     def __str__(self):
+<<<<<<< HEAD
         return self.title
 
 
@@ -71,3 +78,6 @@ class OrderItem(models.Model):
     title = models.CharField(max_length=255, verbose_name='產品名稱')
     price = models.IntegerField(verbose_name='價格')
     quantity = models.IntegerField(verbose_name='數量')
+=======
+        return self.title
+>>>>>>> 38e9ecd4eaae03ef4084980fa893f1aa5e42b94e
