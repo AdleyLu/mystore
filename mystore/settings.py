@@ -27,6 +27,7 @@ SECRET_KEY = 'x@fr$^$8(&rfgj)!4098#9ama)0_2ztiip7x2ac(r*!qa1nq2u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOCAL = False
 
 ALLOWED_HOSTS = ['localhost', 'mystore02.herokuapp.com']
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -163,3 +165,56 @@ SPGATEWAY_PROFILE = {
 }
 SPGATEWAY_MERCHANTID = 'MS12235458'
 SPGATEWAY_ORDERMODEL = 'estore.Order'
+
+if LOCAL:
+    INSTALLED_APPS += ('naomi',)
+    EMAIL_BACKEND = 'naomi.mail.backends.naomi.NaomiBackend'
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'mail')
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+    SPGATEWAY_PROFILE = {
+        'MERCHANT_ID_HRERE': {
+            'MerchantID': 'MERCHANT_ID_HRERE',
+            'HashKey': 'HASHKEY_HERE',
+            'HashIV': 'HASHIV_HERE',
+            'ReturnURL': reverse_lazy('spgateway_NotifyView'),
+            'NotifyURL': '',
+        }
+    }
+    SPGATEWAY_MERCHANTID = 'MERCHANT_ID_HRERE'
+else:
+    ALLOWED_HOSTS += ('lit-beach-81401.herokuapp.com',)
+
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Extra places for collectstatic to find static files.
+    STATICFILES_DIRS = (
+    )
+
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+    INSTALLED_APPS += ('storages',)
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+
+    MEDIA_URL = 'http://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
+
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+    SPGATEWAY_PROFILE = {
+        os.environ.get('SPGATEWAY_MERCHANT_ID', ''): {
+            'MerchantID': os.environ.get('SPGATEWAY_MERCHANT_ID', ''),
+            'HashKey': os.environ.get('SPGATEWAY_HASHKEY', ''),
+            'HashIV': os.environ.get('SPGATEWAY_HASHIV', ''),
+        }
+    }
+    SPGATEWAY_MERCHANTID = os.environ.get('SPGATEWAY_MERCHANT_ID', '')
